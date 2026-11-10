@@ -1390,1035 +1390,601 @@ const AddProduct = () => {
     // =====================================================
 
     return (
-        <div className="add-product">
+  <main className="apx-page">
+    <section className="apx-card">
+      <header className="apx-header">
+        <div className="apx-header-content">
+          <div className="apx-header-icon" aria-hidden="true">
+            +
+          </div>
 
-            {/* =================================================
-                HEADER
-            ================================================= */}
+          <div>
+            <span className="apx-eyebrow">PRODUCT MANAGEMENT</span>
+            <h1 className="apx-title">Add a product</h1>
+            <p className="apx-subtitle">
+              Add product details, pricing, and inventory information.
+            </p>
+          </div>
+        </div>
+      </header>
 
-            <div className="page-header">
+      <form className="apx-form" onSubmit={handleSubmit}>
+        {/* BASIC INFORMATION */}
+        <section className="apx-section">
+          <div className="apx-section-heading">
+            <div>
+              <h2>Basic information</h2>
+              <p>Set up the product identity and classification.</p>
+            </div>
+            <span className="apx-required-note">
+              <span>*</span> Required
+            </span>
+          </div>
 
-                <h2>
-                    Add Product
-                </h2>
-
-                <p>
-                    Create New Product
-                </p>
-
+          <div className="apx-grid">
+            <div className="apx-field apx-field-span-2">
+              <label htmlFor="apx-product-name">
+                Product name <span className="apx-required">*</span>
+              </label>
+              <input
+                id="apx-product-name"
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="e.g. MacBook Pro 14-inch"
+                required
+              />
             </div>
 
-            {/* =================================================
-                FORM
-            ================================================= */}
+            <div className="apx-field">
+              <label htmlFor="apx-category">
+                Category <span className="apx-required">*</span>
+              </label>
+              <select
+                id="apx-category"
+                name="category"
+                value={formData.category}
+                onChange={handleCategoryChange}
+                required
+              >
+                <option value="">Select category</option>
+                {getParentCategories().map((category) => (
+                  <option key={category._id} value={category._id}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-            <form
-                className="product-form"
-                onSubmit={handleSubmit}
-            >
+            <div className="apx-field">
+              <label htmlFor="apx-subcategory">Subcategory</label>
+              <select
+                id="apx-subcategory"
+                name="subcategory"
+                value={formData.subcategory}
+                onChange={handleSubcategoryChange}
+                disabled={!formData.category || subcategories.length === 0}
+              >
+                <option value="">
+                  {!formData.category
+                    ? "Select a category first"
+                    : subcategories.length === 0
+                    ? "No subcategories available"
+                    : "Select subcategory"}
+                </option>
+                {subcategories.map((subcategory) => (
+                  <option key={subcategory._id} value={subcategory._id}>
+                    {subcategory.name}
+                  </option>
+                ))}
+              </select>
+              {formData.category && subcategories.length === 0 && (
+                <small>This category has no subcategories.</small>
+              )}
+            </div>
 
-                {/* =================================================
-                    BASIC INFORMATION
-                ================================================= */}
+            <div className="apx-field">
+              <label htmlFor="apx-brand">
+                Brand <span className="apx-required">*</span>
+              </label>
+              <select
+                id="apx-brand"
+                name="brand"
+                value={formData.brand}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select brand</option>
+                {brands.map((brand) => (
+                  <option key={brand._id} value={brand._id}>
+                    {brand.name}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-                <div className="form-section">
+            <div className="apx-field">
+              <label htmlFor="apx-product-type">
+                Product type <span className="apx-required">*</span>
+              </label>
+              <select
+                id="apx-product-type"
+                name="productType"
+                value={formData.productType}
+                onChange={handleProductTypeChange}
+                required
+              >
+                <option value="NEW">New product</option>
+                <option value="REFURBISHED">Refurbished product</option>
+                <option value="RENTAL">Rental product</option>
+              </select>
+            </div>
 
-                    <h3>
-                        Basic Information
-                    </h3>
+            <div className="apx-field">
+              <label htmlFor="apx-hsn">HSN code</label>
+              <input
+                id="apx-hsn"
+                type="text"
+                name="hsnCode"
+                value={formData.hsnCode}
+                onChange={handleChange}
+                placeholder="e.g. 84713010"
+                maxLength={8}
+                inputMode="numeric"
+              />
+              <small>Optional · 4, 6, or 8 digits</small>
+            </div>
+          </div>
+        </section>
 
-                    <div className="form-grid">
+        {/* REFURBISHED DETAILS */}
+        {formData.productType === "REFURBISHED" && (
+          <section className="apx-section apx-section-tinted">
+            <div className="apx-section-heading">
+              <div>
+                <h2>Refurbished details</h2>
+                <p>Describe the product’s condition and testing.</p>
+              </div>
+            </div>
 
-                        {/* PRODUCT NAME */}
+            <div className="apx-grid">
+              <div className="apx-field">
+                <label htmlFor="apx-grade">
+                  Grade <span className="apx-required">*</span>
+                </label>
+                <select
+                  id="apx-grade"
+                  name="grade"
+                  value={formData.refurbishedDetails.grade}
+                  onChange={handleRefurbishedChange}
+                  required
+                >
+                  <option value="">Select grade</option>
+                  <option value="A+">A+ — Excellent</option>
+                  <option value="A">A — Very good</option>
+                  <option value="B">B — Good</option>
+                  <option value="C">C — Fair</option>
+                </select>
+              </div>
 
-                        <div className="form-group">
+              <div className="apx-field">
+                <label htmlFor="apx-battery">
+                  Battery health (%) <span className="apx-required">*</span>
+                </label>
+                <input
+                  id="apx-battery"
+                  type="number"
+                  name="batteryHealth"
+                  value={formData.refurbishedDetails.batteryHealth}
+                  onChange={handleRefurbishedChange}
+                  min="0"
+                  max="100"
+                  placeholder="e.g. 85"
+                  required
+                />
+              </div>
 
-                            <label>
-                                Product Name
-                            </label>
+              <div className="apx-field">
+                <label htmlFor="apx-warranty">
+                  Warranty (months) <span className="apx-required">*</span>
+                </label>
+                <input
+                  id="apx-warranty"
+                  type="number"
+                  name="warrantyMonths"
+                  value={formData.refurbishedDetails.warrantyMonths}
+                  onChange={handleRefurbishedChange}
+                  min="0"
+                  placeholder="e.g. 6"
+                  required
+                />
+              </div>
 
-                            <input
-                                type="text"
-                                name="name"
-                                value={
-                                    formData.name
-                                }
-                                onChange={
-                                    handleChange
-                                }
-                                placeholder="Enter Product Name"
-                                required
-                            />
+              <div className="apx-field">
+                <label htmlFor="apx-testing">
+                  Testing status <span className="apx-required">*</span>
+                </label>
+                <select
+                  id="apx-testing"
+                  name="testingStatus"
+                  value={formData.refurbishedDetails.testingStatus}
+                  onChange={handleRefurbishedChange}
+                  required
+                >
+                  <option value="">Select status</option>
+                  <option value="TESTED">Tested</option>
+                  <option value="NOT_TESTED">Not tested</option>
+                </select>
+              </div>
+            </div>
+          </section>
+        )}
 
-                        </div>
+        {/* RENTAL DETAILS */}
+        {formData.productType === "RENTAL" && (
+          <section className="apx-section apx-section-tinted">
+            <div className="apx-section-heading">
+              <div>
+                <h2>Rental details</h2>
+                <p>Configure rental pricing, availability, and inclusions.</p>
+              </div>
+            </div>
 
-                        {/* CATEGORY */}
+            <div className="apx-grid">
+              <div className="apx-field">
+                <label htmlFor="apx-monthly-rent">
+                  Monthly rent <span className="apx-required">*</span>
+                </label>
+                <input
+                  id="apx-monthly-rent"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  value={formData.rental.monthlyRent}
+                  onChange={(e) =>
+                    handleRentalChange("monthlyRent", e.target.value)
+                  }
+                  placeholder="Enter monthly rent"
+                  required
+                />
+              </div>
 
-                        <div className="form-group">
+              <div className="apx-field">
+                <label htmlFor="apx-deposit">Security deposit</label>
+                <input
+                  id="apx-deposit"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  value={formData.rental.securityDeposit}
+                  onChange={(e) =>
+                    handleRentalChange("securityDeposit", e.target.value)
+                  }
+                  placeholder="Enter deposit"
+                />
+              </div>
 
-                            <label>
-                                Category
-                            </label>
+              <div className="apx-field">
+                <label htmlFor="apx-minimum-months">
+                  Minimum rental period (months)
+                </label>
+                <input
+                  id="apx-minimum-months"
+                  type="number"
+                  min="3"
+                  step="1"
+                  value={formData.rental.minimumRentalMonths}
+                  onChange={(e) =>
+                    handleRentalChange(
+                      "minimumRentalMonths",
+                      e.target.value
+                    )
+                  }
+                />
+                <small>Minimum rental period is 3 months.</small>
+              </div>
 
-                            <select
-                                name="category"
-                                value={
-                                    formData.category
-                                }
-                                onChange={
-                                    handleCategoryChange
-                                }
-                                required
-                            >
+              <div className="apx-field">
+                <label htmlFor="apx-rental-gst">Rental GST (%)</label>
+                <input
+                  id="apx-rental-gst"
+                  type="number"
+                  min="0"
+                  max="100"
+                  step="0.01"
+                  value={formData.rental.gst}
+                  onChange={(e) =>
+                    handleRentalChange("gst", e.target.value)
+                  }
+                  placeholder="e.g. 18"
+                />
+              </div>
 
-                                <option value="">
-                                    Select Category
-                                </option>
+              <div className="apx-field">
+                <label htmlFor="apx-quantity">
+                  Available quantity <span className="apx-required">*</span>
+                </label>
+                <input
+                  id="apx-quantity"
+                  type="number"
+                  min="1"
+                  step="1"
+                  value={formData.rental.availableQuantity}
+                  onChange={(e) =>
+                    handleRentalChange("availableQuantity", e.target.value)
+                  }
+                  required
+                />
+              </div>
 
-                                {getParentCategories().map(
-                                    (category) => (
-                                        <option
-                                            key={
-                                                category._id
-                                            }
-                                            value={
-                                                category._id
-                                            }
-                                        >
-                                            {
-                                                category.name
-                                            }
-                                        </option>
-                                    )
-                                )}
+              <div className="apx-field apx-field-switch">
+                <span className="apx-label">Basic software</span>
+                <label className="apx-switch-row">
+                  <input
+                    type="checkbox"
+                    checked={formData.rental.basicSoftwareInstalled}
+                    onChange={(e) =>
+                      handleRentalChange(
+                        "basicSoftwareInstalled",
+                        e.target.checked
+                      )
+                    }
+                  />
+                  <span>Software is installed</span>
+                </label>
+              </div>
 
-                            </select>
-
-                        </div>
-
-                        {/* SUBCATEGORY */}
-
-                        <div className="form-group">
-
-                            <label>
-                                Subcategory
-                            </label>
-
-                            <select
-                                name="subcategory"
-                                value={
-                                    formData.subcategory
-                                }
-                                onChange={
-                                    handleSubcategoryChange
-                                }
-                                disabled={
-                                    !formData.category ||
-                                    subcategories.length === 0
-                                }
-                            >
-
-                                <option value="">
-
-                                    {!formData.category
-                                        ? "Select Category First"
-                                        : subcategories.length === 0
-                                        ? "No Subcategories"
-                                        : "Select Subcategory"}
-
-                                </option>
-
-                                {subcategories.map(
-                                    (subcategory) => (
-                                        <option
-                                            key={
-                                                subcategory._id
-                                            }
-                                            value={
-                                                subcategory._id
-                                            }
-                                        >
-                                            {
-                                                subcategory.name
-                                            }
-                                        </option>
-                                    )
-                                )}
-
-                            </select>
-
-                            {formData.category &&
-                                subcategories.length ===
-                                    0 && (
-                                    <small className="subcategory-help">
-                                        This category has no
-                                        subcategories.
-                                    </small>
-                                )}
-
-                        </div>
-
-                        {/* BRAND */}
-
-                        <div className="form-group">
-
-                            <label>
-                                Brand
-                            </label>
-
-                            <select
-                                name="brand"
-                                value={
-                                    formData.brand
-                                }
-                                onChange={
-                                    handleChange
-                                }
-                                required
-                            >
-
-                                <option value="">
-                                    Select Brand
-                                </option>
-
-                                {brands.map(
-                                    (brand) => (
-                                        <option
-                                            key={
-                                                brand._id
-                                            }
-                                            value={
-                                                brand._id
-                                            }
-                                        >
-                                            {
-                                                brand.name
-                                            }
-                                        </option>
-                                    )
-                                )}
-
-                            </select>
-
-                        </div>
-
-                        {/* PRODUCT TYPE */}
-
-                        <div className="form-group">
-
-                            <label>
-                                Product Type
-                            </label>
-
-                            <select
-                                name="productType"
-                                value={
-                                    formData.productType
-                                }
-                                onChange={
-                                    handleProductTypeChange
-                                }
-                                required
-                            >
-
-                                <option value="NEW">
-                                    New Product
-                                </option>
-
-                                <option value="REFURBISHED">
-                                    Refurbished Product
-                                </option>
-
-                                <option value="RENTAL">
-                                    Rental Product
-                                </option>
-
-                            </select>
-
-                        </div>
-
-                        {/* =================================================
-                            CHANGE (5/5): HSN CODE INPUT (NEW FIELD)
-                            Optional. 4, 6 or 8 digits.
-                            Used on tax invoices.
-                            handleChange works because name="hsnCode".
-                        ================================================= */}
-
-                        <div className="form-group">
-
-                            <label>
-                                HSN Code
-                            </label>
-
-                            <input
-                                type="text"
-                                name="hsnCode"
-                                value={
-                                    formData.hsnCode
-                                }
-                                onChange={
-                                    handleChange
-                                }
-                                placeholder="Example: 84713010"
-                                maxLength={8}
-                                inputMode="numeric"
-                            />
-
-                            <small>
-                                Used on tax invoices
-                                (4, 6 or 8 digits).
-                            </small>
-
-                        </div>
-
-                    </div>
-
+              <div className="apx-field apx-field-span-2">
+                <span className="apx-label">Included items</span>
+                <div className="apx-check-grid">
+                  {[
+                    "LAPTOP",
+                    "CHARGING_ADAPTER",
+                    "BACKPACK",
+                    "MOUSE",
+                    "LAPTOP_BAG",
+                  ].map((item) => (
+                    <label className="apx-check-card" key={item}>
+                      <input
+                        type="checkbox"
+                        checked={formData.rental.includedItems.includes(item)}
+                        onChange={() => handleRentalItemChange(item)}
+                      />
+                      <span>{item.replaceAll("_", " ")}</span>
+                    </label>
+                  ))}
                 </div>
-
-                {/* =================================================
-                    REFURBISHED DETAILS
-                ================================================= */}
-
-                {formData.productType ===
-                    "REFURBISHED" && (
-                    <div className="form-section">
-
-                        <h3>
-                            Refurbished Product Details
-                        </h3>
-
-                        <div className="form-grid">
-
-                            {/* GRADE */}
-
-                            <div className="form-group">
-
-                                <label>
-                                    Refurbished Grade
-                                </label>
-
-                                <select
-                                    name="grade"
-                                    value={
-                                        formData
-                                            .refurbishedDetails
-                                            .grade
-                                    }
-                                    onChange={
-                                        handleRefurbishedChange
-                                    }
-                                    required
-                                >
-
-                                    <option value="">
-                                        Select Grade
-                                    </option>
-
-                                    <option value="A+">
-                                        A+ - Excellent
-                                    </option>
-
-                                    <option value="A">
-                                        A - Very Good
-                                    </option>
-
-                                    <option value="B">
-                                        B - Good
-                                    </option>
-
-                                    <option value="C">
-                                        C - Fair
-                                    </option>
-
-                                </select>
-
-                            </div>
-
-                            {/* BATTERY */}
-
-                            <div className="form-group">
-
-                                <label>
-                                    Battery Health (%)
-                                </label>
-
-                                <input
-                                    type="number"
-                                    name="batteryHealth"
-                                    value={
-                                        formData
-                                            .refurbishedDetails
-                                            .batteryHealth
-                                    }
-                                    onChange={
-                                        handleRefurbishedChange
-                                    }
-                                    min="0"
-                                    max="100"
-                                    step="1"
-                                    placeholder="Example: 85"
-                                    required
-                                />
-
-                            </div>
-
-                            {/* WARRANTY */}
-
-                            <div className="form-group">
-
-                                <label>
-                                    Warranty (Months)
-                                </label>
-
-                                <input
-                                    type="number"
-                                    name="warrantyMonths"
-                                    value={
-                                        formData
-                                            .refurbishedDetails
-                                            .warrantyMonths
-                                    }
-                                    onChange={
-                                        handleRefurbishedChange
-                                    }
-                                    min="0"
-                                    step="1"
-                                    placeholder="Example: 6"
-                                    required
-                                />
-
-                            </div>
-
-                            {/* TESTING */}
-
-                            <div className="form-group">
-
-                                <label>
-                                    Testing Status
-                                </label>
-
-                                <select
-                                    name="testingStatus"
-                                    value={
-                                        formData
-                                            .refurbishedDetails
-                                            .testingStatus
-                                    }
-                                    onChange={
-                                        handleRefurbishedChange
-                                    }
-                                    required
-                                >
-
-                                    <option value="">
-                                        Select Testing Status
-                                    </option>
-
-                                    <option value="TESTED">
-                                        Tested
-                                    </option>
-
-                                    <option value="NOT_TESTED">
-                                        Not Tested
-                                    </option>
-
-                                </select>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-                )}
-
-                {/* =================================================
-                    RENTAL DETAILS
-                ================================================= */}
-
-                {formData.productType ===
-                    "RENTAL" && (
-                    <div className="form-section rental-section">
-
-                        <h3>
-                            Rental Details
-                        </h3>
-
-                        <div className="form-grid">
-
-                            {/* MONTHLY RENT */}
-
-                            <div className="form-group">
-
-                                <label>
-                                    Monthly Rent
-                                </label>
-
-                                <input
-                                    type="number"
-                                    min="0"
-                                    step="0.01"
-                                    name="monthlyRent"
-                                    value={
-                                        formData
-                                            .rental
-                                            .monthlyRent
-                                    }
-                                    onChange={(e) =>
-                                        handleRentalChange(
-                                            "monthlyRent",
-                                            e.target.value
-                                        )
-                                    }
-                                    placeholder="Enter monthly rent"
-                                    required
-                                />
-
-                            </div>
-
-                            {/* SECURITY DEPOSIT */}
-
-                            <div className="form-group">
-
-                                <label>
-                                    Security Deposit
-                                </label>
-
-                                <input
-                                    type="number"
-                                    min="0"
-                                    step="0.01"
-                                    name="securityDeposit"
-                                    value={
-                                        formData
-                                            .rental
-                                            .securityDeposit
-                                    }
-                                    onChange={(e) =>
-                                        handleRentalChange(
-                                            "securityDeposit",
-                                            e.target.value
-                                        )
-                                    }
-                                    placeholder="Enter security deposit"
-                                    required
-                                />
-
-                            </div>
-
-                            {/* MINIMUM MONTHS */}
-
-                            <div className="form-group">
-
-                                <label>
-                                    Minimum Rental Months
-                                </label>
-
-                                <input
-                                    type="number"
-                                    min="3"
-                                    step="1"
-                                    name="minimumRentalMonths"
-                                    value={
-                                        formData
-                                            .rental
-                                            .minimumRentalMonths
-                                    }
-                                    onChange={(e) =>
-                                        handleRentalChange(
-                                            "minimumRentalMonths",
-                                            e.target.value
-                                        )
-                                    }
-                                    required
-                                />
-
-                                <small>
-                                    Minimum rental period is
-                                    3 months.
-                                </small>
-
-                            </div>
-
-                            {/* GST */}
-
-                            <div className="form-group">
-
-                                <label>
-                                    Rental GST (%)
-                                </label>
-
-                                <input
-                                    type="number"
-                                    min="0"
-                                    max="100"
-                                    step="0.01"
-                                    name="gst"
-                                    value={
-                                        formData
-                                            .rental
-                                            .gst
-                                    }
-                                    onChange={(e) =>
-                                        handleRentalChange(
-                                            "gst",
-                                            e.target.value
-                                        )
-                                    }
-                                    placeholder="Example: 18"
-                                />
-
-                            </div>
-
-                            {/* QUANTITY */}
-
-                            <div className="form-group">
-
-                                <label>
-                                    Available Quantity
-                                </label>
-
-                                <input
-                                    type="number"
-                                    min="1"
-                                    step="1"
-                                    name="availableQuantity"
-                                    value={
-                                        formData
-                                            .rental
-                                            .availableQuantity
-                                    }
-                                    onChange={(e) =>
-                                        handleRentalChange(
-                                            "availableQuantity",
-                                            e.target.value
-                                        )
-                                    }
-                                    required
-                                />
-
-                            </div>
-
-                        </div>
-                        {/* SOFTWARE */}
-
-                        <div className="form-group">
-
-                            <label className="checkbox-label">
-
-                                <input
-                                    type="checkbox"
-                                    checked={
-                                        formData
-                                            .rental
-                                            .basicSoftwareInstalled
-                                    }
-                                    onChange={(e) =>
-                                        handleRentalChange(
-                                            "basicSoftwareInstalled",
-                                            e.target.checked
-                                        )
-                                    }
-                                />
-
-                                Basic Software Installed
-
-                            </label>
-
-                        </div>
-
-                        {/* INCLUDED ITEMS */}
-
-                        <div className="form-group">
-
-                            <label>
-                                Included Items
-                            </label>
-
-                            <div className="rental-items">
-
-                                {[
-                                    "LAPTOP",
-                                    "CHARGING_ADAPTER",
-                                    "BACKPACK",
-                                    "MOUSE",
-                                    "LAPTOP_BAG",
-                                ].map((item) => (
-                                    <label
-                                        key={item}
-                                        className="checkbox-label"
-                                    >
-
-                                        <input
-                                            type="checkbox"
-                                            checked={
-                                                formData
-                                                    .rental
-                                                    .includedItems
-                                                    .includes(
-                                                        item
-                                                    )
-                                            }
-                                            onChange={() =>
-                                                handleRentalItemChange(
-                                                    item
-                                                )
-                                            }
-                                        />
-
-                                        {item.replaceAll(
-                                            "_",
-                                            " "
-                                        )}
-
-                                    </label>
-                                ))}
-
-                            </div>
-
-                        </div>
-
-                        {/* NOTES */}
-
-                        <div className="form-group">
-
-                            <label>
-                                Rental Notes
-                            </label>
-
-                            <textarea
-                                name="rentalNotes"
-                                value={
-                                    formData
-                                        .rental
-                                        .notes
-                                }
-                                onChange={(e) =>
-                                    handleRentalChange(
-                                        "notes",
-                                        e.target.value
-                                    )
-                                }
-                                rows={4}
-                                placeholder="Enter rental notes..."
-                            />
-
-                        </div>
-
-                    </div>
-                )}
-
-                {/* =================================================
-                    DESCRIPTION
-                ================================================= */}
-
-                <div className="form-section">
-
-                    <h3>
-                        Description
-                    </h3>
-
-                    <div className="form-group">
-
-                        <label>
-                            Short Description
-                        </label>
-
-                        <textarea
-                            name="shortDescription"
-                            value={
-                                formData
-                                    .shortDescription
-                            }
-                            onChange={
-                                handleChange
-                            }
-                            rows={3}
-                            placeholder="Enter short description"
-                        />
-
-                    </div>
-
-                    <div className="form-group">
-
-                        <label>
-                            Description
-                        </label>
-
-                        <textarea
-                            name="description"
-                            value={
-                                formData.description
-                            }
-                            onChange={
-                                handleChange
-                            }
-                            rows={8}
-                            placeholder="Enter product description"
-                        />
-
-                    </div>
-
+              </div>
+
+              <div className="apx-field apx-field-span-2">
+                <label htmlFor="apx-rental-notes">Rental notes</label>
+                <textarea
+                  id="apx-rental-notes"
+                  value={formData.rental.notes}
+                  onChange={(e) =>
+                    handleRentalChange("notes", e.target.value)
+                  }
+                  rows={3}
+                  placeholder="Add any rental-specific notes..."
+                />
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* DESCRIPTION */}
+        <section className="apx-section">
+          <div className="apx-section-heading">
+            <div>
+              <h2>Description</h2>
+              <p>Help customers understand what this product offers.</p>
+            </div>
+          </div>
+
+          <div className="apx-stack">
+            <div className="apx-field">
+              <label htmlFor="apx-short-description">Short description</label>
+              <textarea
+                id="apx-short-description"
+                name="shortDescription"
+                value={formData.shortDescription}
+                onChange={handleChange}
+                rows={3}
+                placeholder="Write a brief product summary..."
+              />
+            </div>
+
+            <div className="apx-field">
+              <label htmlFor="apx-description">Full description</label>
+              <textarea
+                id="apx-description"
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+                rows={5}
+                placeholder="Add product specifications, features, and other details..."
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* PRICING */}
+        <section className="apx-section">
+          <div className="apx-section-heading">
+            <div>
+              <h2>Pricing</h2>
+              <p>Set customer pricing and applicable taxes.</p>
+            </div>
+          </div>
+
+          <div className="apx-grid">
+            <div className="apx-field">
+              <label htmlFor="apx-purchase-price">Purchase price</label>
+              <input
+                id="apx-purchase-price"
+                type="number"
+                name="purchasePrice"
+                value={formData.purchasePrice}
+                onChange={handleChange}
+                min="0"
+                step="0.01"
+                placeholder="0.00"
+              />
+            </div>
+
+            <div className="apx-field">
+              <label htmlFor="apx-retail-price">
+                Retail price <span className="apx-required">*</span>
+              </label>
+              <input
+                id="apx-retail-price"
+                type="number"
+                name="retailPrice"
+                value={formData.retailPrice}
+                onChange={handleChange}
+                min="0"
+                step="0.01"
+                placeholder="Personal customer price"
+                required
+              />
+            </div>
+
+            <div className="apx-field">
+              <label htmlFor="apx-wholesale-price">
+                Wholesale / corporate price
+              </label>
+              <input
+                id="apx-wholesale-price"
+                type="number"
+                name="wholesalePrice"
+                value={formData.wholesalePrice}
+                onChange={handleChange}
+                min="0"
+                step="0.01"
+                placeholder="Business customer price"
+              />
+              <small>Leave blank if not applicable.</small>
+            </div>
+
+            <div className="apx-field">
+              <label htmlFor="apx-mrp">
+                MRP <span className="apx-required">*</span>
+              </label>
+              <input
+                id="apx-mrp"
+                type="number"
+                name="mrp"
+                value={formData.mrp}
+                onChange={handleChange}
+                min="0"
+                step="0.01"
+                placeholder="0.00"
+                required
+              />
+            </div>
+
+            <div className="apx-field">
+              <label htmlFor="apx-discount">Discount (%)</label>
+              <input
+                id="apx-discount"
+                type="number"
+                name="discount"
+                value={formData.discount}
+                onChange={handleChange}
+                min="0"
+                max="100"
+                step="0.01"
+                placeholder="0"
+              />
+            </div>
+
+            <div className="apx-field">
+              <label htmlFor="apx-gst">Product GST (%)</label>
+              <input
+                id="apx-gst"
+                type="number"
+                name="gst"
+                value={formData.gst}
+                onChange={handleChange}
+                min="0"
+                max="100"
+                step="0.01"
+                placeholder="0"
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* IMAGES */}
+        <section className="apx-section">
+          <div className="apx-section-heading">
+            <div>
+              <h2>Product images</h2>
+              <p>Upload up to five images, with a maximum size of 5 MB each.</p>
+            </div>
+          </div>
+
+          <div className="apx-upload-area">
+            <input
+              ref={fileInputRef}
+              id="apx-product-images"
+              type="file"
+              multiple
+              accept="image/*"
+              onChange={handleImageChange}
+            />
+            <label htmlFor="apx-product-images" className="apx-upload-label">
+              <span className="apx-upload-icon" aria-hidden="true">
+                ↑
+              </span>
+              <span className="apx-upload-copy">
+                <strong>Choose images to upload</strong>
+                <small>PNG, JPG, or other image formats · Up to 5 images</small>
+              </span>
+              <span className="apx-browse-button">Browse files</span>
+            </label>
+          </div>
+
+          {previewImages.length > 0 && (
+            <div className="apx-image-preview">
+              {previewImages.map((image, index) => (
+                <div className="apx-preview-item" key={`${image}-${index}`}>
+                  <img src={image} alt={`Product preview ${index + 1}`} />
+                  <span className="apx-preview-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
                 </div>
+              ))}
+            </div>
+          )}
+        </section>
 
-                {/* =================================================
-                    PRICING
-                    retailPrice     -> PERSONAL customer price (required)
-                    wholesalePrice  -> BUSINESS / CORPORATE customer price (optional)
-                ================================================= */}
-
-                <div className="form-section">
-
-                    <h3>
-                        Pricing
-                    </h3>
-
-                    <div className="form-grid">
-
-                        {/* PURCHASE PRICE */}
-
-                        <div className="form-group">
-
-                            <label>
-                                Purchase Price
-                            </label>
-
-                            <input
-                                type="number"
-                                name="purchasePrice"
-                                value={
-                                    formData.purchasePrice
-                                }
-                                onChange={
-                                    handleChange
-                                }
-                                min="0"
-                                step="0.01"
-                                placeholder="Purchase price"
-                            />
-
-                        </div>
-
-                        {/* RETAIL PRICE */}
-
-                        <div className="form-group">
-
-                            <label>
-                                Retail Price
-                            </label>
-
-                            <input
-                                type="number"
-                                name="retailPrice"
-                                value={
-                                    formData.retailPrice
-                                }
-                                onChange={
-                                    handleChange
-                                }
-                                min="0"
-                                step="0.01"
-                                placeholder="Price for personal customers"
-                                required
-                            />
-
-                        </div>
-
-                        {/* WHOLESALE / CORPORATE PRICE */}
-
-                        <div className="form-group">
-
-                            <label>
-                                Wholesale / Corporate Price
-                            </label>
-
-                            <input
-                                type="number"
-                                name="wholesalePrice"
-                                value={
-                                    formData.wholesalePrice
-                                }
-                                onChange={
-                                    handleChange
-                                }
-                                min="0"
-                                step="0.01"
-                                placeholder="Price for corporate/business customers"
-                            />
-
-                            <small>
-                                Leave blank if this product
-                                isn't sold to corporate customers.
-                            </small>
-
-                        </div>
-
-                        {/* MRP */}
-
-                        <div className="form-group">
-
-                            <label>
-                                MRP
-                            </label>
-
-                            <input
-                                type="number"
-                                name="mrp"
-                                value={
-                                    formData.mrp
-                                }
-                                onChange={
-                                    handleChange
-                                }
-                                min="0"
-                                step="0.01"
-                                required
-                            />
-
-                        </div>
-
-                        {/* DISCOUNT */}
-
-                        <div className="form-group">
-
-                            <label>
-                                Discount (%)
-                            </label>
-
-                            <input
-                                type="number"
-                                name="discount"
-                                value={
-                                    formData.discount
-                                }
-                                onChange={
-                                    handleChange
-                                }
-                                min="0"
-                                max="100"
-                                step="0.01"
-                            />
-
-                        </div>
-
-                        {/* GST */}
-
-                        <div className="form-group">
-
-                            <label>
-                                Product GST (%)
-                            </label>
-
-                            <input
-                                type="number"
-                                name="gst"
-                                value={
-                                    formData.gst
-                                }
-                                onChange={
-                                    handleChange
-                                }
-                                min="0"
-                                max="100"
-                                step="0.01"
-                            />
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                {/* =================================================
-                    PRODUCT IMAGES
-                ================================================= */}
-
-                <div className="form-section">
-
-                    <h3>
-                        Product Images
-                    </h3>
-
-                    <div className="form-group">
-
-                        <input
-                            ref={
-                                fileInputRef
-                            }
-                            type="file"
-                            multiple
-                            accept="image/*"
-                            onChange={
-                                handleImageChange
-                            }
-                        />
-
-                        <small>
-                            Maximum 5 images, each less
-                            than 5MB.
-                        </small>
-
-                    </div>
-
-                    {previewImages.length > 0 && (
-                        <div className="image-preview">
-
-                            {previewImages.map(
-                                (
-                                    image,
-                                    index
-                                ) => (
-                                    <img
-                                        key={
-                                            index
-                                        }
-                                        src={
-                                            image
-                                        }
-                                        alt={`Preview ${
-                                            index + 1
-                                        }`}
-                                        className="preview-img"
-                                    />
-                                )
-                            )}
-
-                        </div>
-                    )}
-
-                </div>
-
-                {/* =================================================
-                    SUBMIT
-                ================================================= */}
-
-                <div className="submit-section">
-
-                    <button
-                        type="submit"
-                        className="submit-btn"
-                        disabled={
-                            loading
-                        }
-                    >
-
-                        {loading
-                            ? "Saving Product..."
-                            : formData.productType ===
-                              "RENTAL"
-                            ? "Save Rental Product"
-                            : formData.productType ===
-                              "REFURBISHED"
-                            ? "Save Refurbished Product"
-                            : "Save New Product"}
-
-                    </button>
-
-                </div>
-
-            </form>
-
-        </div>
-    );
+        {/* ACTIONS */}
+        <footer className="apx-actions">
+          <p>Review the product information before saving.</p>
+          <button type="submit" className="apx-submit" disabled={loading}>
+            {loading ? (
+              <>
+                <span className="apx-spinner" aria-hidden="true" />
+                Saving product…
+              </>
+            ) : (
+              <>
+                <span aria-hidden="true">+</span>
+                {formData.productType === "RENTAL"
+                  ? "Create rental product"
+                  : formData.productType === "REFURBISHED"
+                  ? "Create refurbished product"
+                  : "Create product"}
+              </>
+            )}
+          </button>
+        </footer>
+      </form>
+    </section>
+  </main>
+);
 };
 
 export default AddProduct;

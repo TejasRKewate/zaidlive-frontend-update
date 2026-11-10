@@ -179,7 +179,6 @@
 
 import React, { useEffect, useRef } from "react";
 import { Check } from "lucide-react";
-import zaidinfotechVideo from "../../assets/vedio/zaidinfotech.mp4";
 import {useNavigate} from "react-router-dom"
 
 // The four checklist points: edit the text here, spacing is set once below
