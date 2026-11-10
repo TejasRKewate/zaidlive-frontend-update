@@ -1,0 +1,314 @@
+
+/* =====================================================
+   ACCOUNTANT LAYOUT
+===================================================== */
+
+.acc-layout-root {
+  --acc-sidebar-width: 270px;
+  --acc-primary: #2563eb;
+  --acc-primary-light: #eff6ff;
+  --acc-text: #1e293b;
+  --acc-muted: #64748b;
+
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  background: #f5f7fb;
+  color: var(--acc-text);
+  font-family: inherit;
+}
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.acc-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--acc-sidebar-width);
+  height: 100vh;
+  background: #ffffff;
+  border-right: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+  overflow: hidden;
+}
+
+/* =====================================================
+   BRAND
+===================================================== */
+
+.acc-sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 85px;
+  padding: 18px;
+  border-bottom: 1px solid #edf0f5;
+}
+
+.acc-brand-avatar {
+  width: 45px;
+  height: 45px;
+  flex-shrink: 0;
+  border-radius: 13px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 21px;
+}
+
+.acc-brand-text h3 {
+  font-size: 16px;
+  margin: 0;
+  font-weight: 800;
+  color: #172554;
+}
+
+.acc-brand-text span {
+  display: block;
+  font-size: 11px;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+.acc-nav-section {
+  flex: 1;
+  padding: 17px 12px;
+  overflow-y: auto;
+}
+
+.acc-nav-group {
+  margin-bottom: 18px;
+}
+
+.acc-nav-heading {
+  display: block;
+  padding: 0 12px;
+  margin-bottom: 8px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.1px;
+  color: #94a3b8;
+}
+
+.acc-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 13px;
+  margin-bottom: 5px;
+  border-radius: 9px;
+  text-decoration: none;
+  color: #475569;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.acc-nav-icon {
+  font-size: 16px;
+  min-width: 18px;
+}
+
+.acc-nav-item:hover {
+  background: #f1f5f9;
+  color: #2563eb;
+}
+
+.acc-nav-item-active {
+  background: #eff6ff;
+  color: #2563eb;
+  font-weight: 700;
+  box-shadow: inset 3px 0 0 #2563eb;
+}
+
+/* =====================================================
+   SIDEBAR FOOTER
+===================================================== */
+
+.acc-sidebar-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  border-top: 1px solid #edf0f5;
+  background: #ffffff;
+}
+
+.acc-user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.acc-user-badge {
+  width: 37px;
+  height: 37px;
+  border-radius: 50%;
+  background: #dbeafe;
+  color: #1d4ed8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+}
+
+.acc-user-meta strong {
+  display: block;
+  font-size: 12px;
+  color: #1e293b;
+}
+
+.acc-user-meta small {
+  display: block;
+  margin-top: 3px;
+  font-size: 10px;
+  color: #94a3b8;
+}
+
+.acc-logout-btn {
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: #fef2f2;
+  color: #dc2626;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.acc-logout-btn:hover {
+  background: #fee2e2;
+}
+
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
+
+.acc-main-canvas {
+  flex: 1;
+  min-width: 0;
+  min-height: 100vh;
+  margin-left: var(--acc-sidebar-width);
+  padding: 24px;
+  transition: margin 0.3s ease;
+}
+
+/* =====================================================
+   MOBILE TOPBAR
+===================================================== */
+
+.acc-mobile-topbar {
+  display: none;
+}
+
+.acc-sidebar-overlay {
+  display: none;
+}
+
+/* =====================================================
+   TABLET & MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+
+  .acc-mobile-topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    padding: 0 16px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1100;
+  }
+
+  .acc-brand-badge {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 14px;
+    font-weight: 800;
+    color: #1e3a8a;
+  }
+
+  .acc-brand-icon {
+    font-size: 19px;
+    color: #2563eb;
+  }
+
+  .acc-menu-toggle-btn {
+    width: 38px;
+    height: 38px;
+    border: none;
+    border-radius: 8px;
+    background: #eff6ff;
+    color: #2563eb;
+    font-size: 19px;
+    cursor: pointer;
+  }
+
+  .acc-sidebar {
+    top: 60px;
+    height: calc(100vh - 60px);
+    width: 270px;
+    transform: translateX(-100%);
+  }
+
+  .acc-sidebar.acc-sidebar-open {
+    transform: translateX(0);
+  }
+
+  .acc-sidebar.acc-sidebar-collapsed {
+    transform: translateX(-100%);
+  }
+
+  .acc-sidebar-overlay {
+    display: block;
+    position: fixed;
+    inset: 60px 0 0;
+    background: rgba(15, 23, 42, 0.45);
+    z-index: 900;
+  }
+
+  .acc-main-canvas {
+    margin-left: 0;
+    margin-top: 60px;
+    padding: 16px;
+    width: 100%;
+  }
+}
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 480px) {
+
+  .acc-main-canvas {
+    padding: 12px;
+  }
+
+  .acc-sidebar {
+    width: min(280px, 85vw);
+  }
+
+  .acc-brand-badge {
+    font-size: 12px;
+  }
+
+}

@@ -1,0 +1,1021 @@
+/* =========================================================
+   WalkInRental.css
+   All classes are prefixed with "wir-" so they never clash
+   with any other component's styles in the app.
+========================================================= */
+
+.wir-page {
+    --wir-primary: #2563eb;
+    --wir-primary-dark: #1d4ed8;
+    --wir-bg: #f4f6fb;
+    --wir-card-bg: #ffffff;
+    --wir-border: #e2e8f0;
+    --wir-text: #1e293b;
+    --wir-text-muted: #64748b;
+    --wir-danger: #dc2626;
+    --wir-warning: #d97706;
+    --wir-success: #16a34a;
+    --wir-radius: 14px;
+
+    min-height: 100vh;
+    background: var(--wir-bg);
+    color: var(--wir-text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.wir-page *,
+.wir-page *::before,
+.wir-page *::after {
+    box-sizing: border-box;
+}
+
+/* ============================= LOADING ============================= */
+
+.wir-loading-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: var(--wir-text-muted);
+    text-align: center;
+    padding: 24px;
+}
+
+.wir-loading-page h2 {
+    margin: 4px 0 0;
+    font-size: 18px;
+}
+
+.wir-loading-page p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.wir-spin {
+    animation: wir-spin-anim 1s linear infinite;
+    font-size: 32px;
+    color: var(--wir-primary);
+}
+
+@keyframes wir-spin-anim {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ============================= HEADER ============================= */
+
+.wir-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    max-width: 980px;
+    margin: 0 auto 16px;
+}
+
+.wir-header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.wir-back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--wir-card-bg);
+    border: 1px solid var(--wir-border);
+    color: var(--wir-text);
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.wir-back-btn:hover {
+    background: #eef2ff;
+    border-color: var(--wir-primary);
+}
+
+.wir-header-title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.wir-header-subtitle {
+    margin: 2px 0 0;
+    font-size: 13px;
+    color: var(--wir-text-muted);
+}
+
+.wir-source-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--wir-primary), var(--wir-primary-dark));
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+}
+
+/* ============================= FORM / CARDS ============================= */
+
+.wir-form {
+    max-width: 980px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.wir-card {
+    background: var(--wir-card-bg);
+    border: 1px solid var(--wir-border);
+    border-radius: var(--wir-radius);
+    padding: 20px;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.wir-section-title {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+    color: var(--wir-primary);
+}
+
+.wir-section-title > svg {
+    margin-top: 3px;
+    flex-shrink: 0;
+    font-size: 18px;
+}
+
+.wir-section-title h2 {
+    margin: 0;
+    font-size: 16px;
+    color: var(--wir-text);
+}
+
+.wir-section-title p {
+    margin: 2px 0 0;
+    font-size: 13px;
+    color: var(--wir-text-muted);
+}
+
+/* ============================= CUSTOMER TYPE ============================= */
+
+.wir-customer-type-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.wir-type-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 18px 12px;
+    background: #f8fafc;
+    border: 2px solid var(--wir-border);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    color: var(--wir-text);
+}
+
+.wir-type-card strong {
+    font-size: 14px;
+}
+
+.wir-type-card span {
+    font-size: 12px;
+    color: var(--wir-text-muted);
+}
+
+.wir-type-card:hover {
+    border-color: var(--wir-primary);
+}
+
+.wir-type-card-active {
+    border-color: var(--wir-primary);
+    background: #eef2ff;
+    color: var(--wir-primary-dark);
+}
+
+.wir-type-card-active svg {
+    color: var(--wir-primary);
+}
+
+/* ============================= SEARCH / REFRESH ============================= */
+
+.wir-search-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--wir-border);
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-bottom: 10px;
+}
+
+.wir-search-box svg {
+    color: var(--wir-text-muted);
+    flex-shrink: 0;
+}
+
+.wir-search-box input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    min-width: 0;
+    background: transparent;
+}
+
+.wir-search-box button {
+    border: none;
+    background: transparent;
+    color: var(--wir-text-muted);
+    cursor: pointer;
+    display: flex;
+}
+
+.wir-refresh-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 14px;
+}
+
+/* ============================= BUTTONS ============================= */
+
+.wir-submit-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--wir-primary);
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    width: 100%;
+}
+
+.wir-submit-btn:hover:not(:disabled) {
+    background: var(--wir-primary-dark);
+}
+
+.wir-submit-btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.wir-cancel-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    color: var(--wir-text);
+    border: 1px solid var(--wir-border);
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.wir-cancel-btn:hover:not(:disabled) {
+    border-color: var(--wir-danger);
+    color: var(--wir-danger);
+}
+
+.wir-cancel-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ============================= EMPTY STATE ============================= */
+
+.wir-empty-products {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 40px 16px;
+    color: var(--wir-text-muted);
+    text-align: center;
+}
+
+.wir-empty-products svg {
+    color: #cbd5e1;
+    margin-bottom: 6px;
+}
+
+.wir-empty-products h3 {
+    margin: 0;
+    font-size: 15px;
+    color: var(--wir-text);
+}
+
+.wir-empty-products p {
+    margin: 0;
+    font-size: 13px;
+}
+
+/* ============================= PRODUCT GRID ============================= */
+
+.wir-product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+}
+
+.wir-product-card {
+    position: relative;
+    border: 1px solid var(--wir-border);
+    border-radius: 12px;
+    padding: 14px;
+    background: #fff;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.wir-product-card-selected {
+    border-color: var(--wir-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.wir-product-image {
+    width: 100%;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f1f5f9;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    color: #94a3b8;
+}
+
+.wir-product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.wir-product-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.wir-product-brand {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--wir-primary);
+    font-weight: 700;
+}
+
+.wir-product-info h3 {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.3;
+}
+
+.wir-product-sku {
+    font-size: 12px;
+    color: var(--wir-text-muted);
+}
+
+.wir-product-prices {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 12px;
+    color: var(--wir-text-muted);
+    margin: 6px 0;
+}
+
+.wir-stock {
+    display: inline-block;
+    width: fit-content;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 999px;
+    margin-bottom: 10px;
+}
+
+.wir-stock-available {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.wir-stock-unavailable {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.wir-product-select-btn {
+    padding: 10px 14px;
+    font-size: 13px;
+}
+
+.wir-selected-check {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: var(--wir-primary);
+    background: #fff;
+    border-radius: 999px;
+    font-size: 18px;
+}
+
+/* ============================= SELECTED SUMMARY ============================= */
+
+.wir-summary-product {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.wir-summary-icon {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eef2ff;
+    color: var(--wir-primary);
+    border-radius: 12px;
+}
+
+.wir-summary-product > div:nth-child(2) {
+    flex: 1;
+    min-width: 160px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.wir-summary-product strong {
+    font-size: 15px;
+}
+
+.wir-summary-product span {
+    font-size: 12px;
+    color: var(--wir-text-muted);
+}
+
+/* ============================= FORM GRID ============================= */
+
+.wir-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.wir-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.wir-form-group-full {
+    grid-column: 1 / -1;
+}
+
+.wir-form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--wir-text);
+}
+
+.wir-form-group small {
+    font-size: 12px;
+    color: var(--wir-text-muted);
+}
+
+.wir-form-group input[type="text"],
+.wir-form-group input[type="tel"],
+.wir-form-group input[type="email"],
+.wir-form-group input[type="number"],
+.wir-form-group textarea,
+.wir-form-group select {
+    width: 100%;
+    border: 1px solid var(--wir-border);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 14px;
+    background: #fff;
+    color: var(--wir-text);
+    outline: none;
+    transition: border-color 0.15s ease;
+}
+
+.wir-form-group input:focus,
+.wir-form-group textarea:focus,
+.wir-form-group select:focus {
+    border-color: var(--wir-primary);
+}
+
+.wir-input-icon {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--wir-border);
+    border-radius: 10px;
+    padding: 10px 12px;
+}
+
+.wir-input-icon svg {
+    color: var(--wir-text-muted);
+    flex-shrink: 0;
+}
+
+.wir-input-icon input,
+.wir-input-icon select {
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 14px;
+    min-width: 0;
+    background: transparent;
+}
+
+.wir-textarea-icon {
+    align-items: flex-start;
+}
+
+.wir-textarea-icon textarea {
+    border: none;
+    outline: none;
+    flex: 1;
+    resize: vertical;
+    font-family: inherit;
+    font-size: 14px;
+    min-width: 0;
+    background: transparent;
+}
+
+/* ============================= STEPPER ============================= */
+
+.wir-stepper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--wir-border);
+    border-radius: 10px;
+    padding: 6px 10px;
+}
+
+.wir-stepper button {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: 1px solid var(--wir-border);
+    background: #f8fafc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.wir-stepper button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.wir-stepper-value {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.1;
+}
+
+.wir-stepper-value strong {
+    font-size: 16px;
+}
+
+.wir-stepper-value span {
+    font-size: 11px;
+    color: var(--wir-text-muted);
+}
+
+.wir-duration-select {
+    cursor: pointer;
+}
+
+/* ============================= DOCUMENTS ============================= */
+
+.wir-document-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+}
+
+.wir-document-card {
+    border: 1px solid var(--wir-border);
+    border-radius: 12px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: #fafbfe;
+}
+
+.wir-document-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+}
+
+.wir-document-header strong {
+    font-size: 13px;
+}
+
+.wir-document-header span {
+    font-size: 10px;
+    color: var(--wir-danger);
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.wir-document-file-label {
+    display: flex;
+    align-items: center;
+    border: 1px dashed var(--wir-border);
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 12px;
+    color: var(--wir-text-muted);
+    cursor: pointer;
+    background: #fff;
+}
+
+.wir-document-file-label input {
+    display: none;
+}
+
+.wir-document-selected {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--wir-success);
+    background: #f0fdf4;
+    border-radius: 8px;
+    padding: 6px 8px;
+    word-break: break-all;
+}
+
+.wir-document-selected span {
+    flex: 1;
+    min-width: 0;
+}
+
+.wir-document-remove-btn {
+    border: none;
+    background: transparent;
+    color: var(--wir-danger);
+    cursor: pointer;
+    display: flex;
+    flex-shrink: 0;
+}
+
+.wir-document-card small {
+    font-size: 11px;
+    color: var(--wir-text-muted);
+}
+
+.wir-document-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 16px;
+    padding: 12px;
+    background: #eff6ff;
+    border-radius: 10px;
+    font-size: 12px;
+    color: #1e40af;
+}
+
+.wir-document-note svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+/* ============================= DEPOSIT SECTION ============================= */
+
+.wir-deposit-box {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.wir-deposit-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 14px;
+    background: #f8fafc;
+    border-radius: 10px;
+}
+
+.wir-deposit-label {
+    display: block;
+    font-size: 12px;
+    color: var(--wir-text-muted);
+}
+
+.wir-deposit-header strong {
+    font-size: 18px;
+}
+
+.wir-deposit-badge {
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.wir-deposit-badge-paid {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.wir-deposit-badge-partial {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+.wir-deposit-badge-unpaid {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.wir-deposit-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.wir-deposit-checkbox input {
+    display: none;
+}
+
+.wir-custom-checkbox {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    border: 2px solid var(--wir-border);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--wir-primary);
+    margin-top: 2px;
+}
+
+.wir-deposit-checkbox input:checked + .wir-custom-checkbox {
+    border-color: var(--wir-primary);
+    background: #eef2ff;
+}
+
+.wir-deposit-checkbox strong {
+    font-size: 14px;
+    display: block;
+}
+
+.wir-deposit-checkbox small {
+    font-size: 12px;
+    color: var(--wir-text-muted);
+}
+
+.wir-deposit-grid {
+    padding-top: 4px;
+}
+
+.wir-deposit-unpaid-note,
+.wir-deposit-partial-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 12px;
+}
+
+.wir-deposit-unpaid-note {
+    background: #fef2f2;
+    color: #991b1b;
+}
+
+.wir-deposit-partial-note {
+    background: #fffbeb;
+    color: #92400e;
+}
+
+.wir-deposit-unpaid-note svg,
+.wir-deposit-partial-note svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.wir-deposit-unpaid-note strong {
+    display: block;
+    margin-bottom: 2px;
+}
+
+/* ============================= SUMMARY ============================= */
+
+.wir-summary-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.wir-summary-lines > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed var(--wir-border);
+}
+
+.wir-summary-lines span {
+    color: var(--wir-text-muted);
+}
+
+.wir-summary-lines strong {
+    font-weight: 600;
+}
+
+.wir-summary-total {
+    border-bottom: none !important;
+    padding-top: 6px;
+    font-size: 16px !important;
+}
+
+.wir-summary-total strong {
+    color: var(--wir-primary);
+    font-size: 18px;
+}
+
+.wir-text-paid {
+    color: var(--wir-success) !important;
+}
+
+.wir-text-partial {
+    color: var(--wir-warning) !important;
+}
+
+.wir-text-unpaid {
+    color: var(--wir-danger) !important;
+}
+
+.wir-submit-help {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--wir-text-muted);
+    margin: 16px 0;
+}
+
+.wir-submit-help svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.wir-submit-row {
+    display: flex;
+    gap: 12px;
+}
+
+.wir-submit-row .wir-cancel-btn {
+    flex: 0 0 auto;
+}
+
+.wir-submit-row .wir-submit-btn {
+    flex: 1;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 768px) {
+    .wir-page {
+        padding: 12px;
+    }
+
+    .wir-card {
+        padding: 16px;
+        border-radius: 12px;
+    }
+
+    .wir-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .wir-form-group-full {
+        grid-column: auto;
+    }
+
+    .wir-product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+
+    .wir-document-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .wir-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .wir-source-badge {
+        align-self: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .wir-customer-type-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .wir-product-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .wir-header-title {
+        font-size: 18px;
+    }
+
+    .wir-section-title h2 {
+        font-size: 15px;
+    }
+
+    .wir-submit-row {
+        flex-direction: column;
+    }
+
+    .wir-submit-row .wir-cancel-btn,
+    .wir-submit-row .wir-submit-btn {
+        width: 100%;
+    }
+
+    .wir-deposit-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .wir-summary-product {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .wir-summary-product .wir-cancel-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 360px) {
+    .wir-product-grid {
+        grid-template-columns: 1fr;
+    }
+}

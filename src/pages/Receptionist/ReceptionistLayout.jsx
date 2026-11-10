@@ -1,0 +1,645 @@
+
+import React, { useState, useEffect, useCallback } from "react";
+import {
+  NavLink,
+  Outlet,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
+
+import {
+  FaCashRegister,
+  FaReceipt,
+  FaUserFriends,
+  FaLaptop,
+  FaSignOutAlt,
+  FaBars,
+  FaTimes,
+  FaHeadset,
+  FaPeopleCarry,
+  FaPlusCircle,
+  FaListAlt,
+  FaCalendarPlus,
+  FaCalendarCheck,
+  FaClipboardList,
+  FaMoneyBillWave,
+  FaFileInvoiceDollar,
+  FaUserTie,
+  FaWallet,
+  FaShoppingCart,
+  FaChartLine,
+  FaLayerGroup,
+  FaTags,
+  FaBoxOpen,
+  FaPercent,
+  FaStar,
+  FaTicketAlt,
+  FaFileInvoice,
+  FaQuestionCircle,
+  FaWarehouse,
+  FaHistory,
+  FaShoppingBag,
+  FaSearch,
+  FaBell,
+  FaChevronDown,
+} from "react-icons/fa";
+
+import "./ReceptionistLayout.css";
+
+const BASE = "/receptionist-dashboard";
+const MOBILE_BREAKPOINT = 992;
+
+const NAV_SECTIONS = [
+  {
+    title: "POS COUNTER",
+    links: [
+      {
+        name: "Sales Dashboard",
+        icon: FaCashRegister,
+        path: `${BASE}`,
+        end: true,
+      },
+      {
+        name: "New Walk-in Order",
+        icon: FaPlusCircle,
+        path: `${BASE}/walk-in-order/new`,
+      },
+      {
+        name: "New Walk-in Rental",
+        icon: FaLaptop,
+        path: `${BASE}/rental/new`,
+      },
+      {
+        name: "Rental List",
+        icon: FaClipboardList,
+        path: `${BASE}/rental/orders`,
+      },
+      {
+        name: "Walk-in Orders List",
+        icon: FaListAlt,
+        path: `${BASE}/walk-in-orders`,
+      },
+      {
+        name: "Customers",
+        icon: FaUserFriends,
+        path: `${BASE}/customers`,
+      },
+    ],
+  },
+  {
+    title: "REPAIR & SERVICES",
+    links: [
+      {
+        name: "Repair Customers",
+        icon: FaPeopleCarry,
+        path: `${BASE}/repair-customers`,
+      },
+      {
+        name: "Repair Rate Cards",
+        icon: FaReceipt,
+        path: `${BASE}/repair-rates`,
+      },
+    ],
+  },
+  {
+    title: "PRODUCTS",
+    links: [
+      {
+        name: "Categories",
+        icon: FaLayerGroup,
+        path: `${BASE}/categories`,
+      },
+      {
+        name: "Add Categories",
+        icon: FaPlusCircle,
+        path: `${BASE}/add-category`,
+      },
+      {
+        name: "Brands",
+        icon: FaTags,
+        path: `${BASE}/brands`,
+      },
+      {
+        name: "Add Brands",
+        icon: FaPlusCircle,
+        path: `${BASE}/add-brand`,
+      },
+      {
+        name: "Products",
+        icon: FaBoxOpen,
+        path: `${BASE}/products`,
+      },
+      {
+        name: "Add Product",
+        icon: FaPlusCircle,
+        path: `${BASE}/add-product`,
+      },
+      {
+        name: "Offers",
+        icon: FaPercent,
+        path: `${BASE}/offers`,
+      },
+      {
+        name: "Add Offer",
+        icon: FaPlusCircle,
+        path: `${BASE}/add-offer`,
+      },
+      {
+        name: "Reviews",
+        icon: FaStar,
+        path: `${BASE}/reviews`,
+      },
+    ],
+  },
+  {
+    title: "COUPONS",
+    links: [
+      {
+        name: "Coupons",
+        icon: FaTicketAlt,
+        path: `${BASE}/coupons`,
+      },
+      {
+        name: "Add Coupon",
+        icon: FaPlusCircle,
+        path: `${BASE}/add-coupon`,
+      },
+    ],
+  },
+  {
+    title: "STORE",
+    links: [
+      {
+        name: "Orders",
+        icon: FaShoppingBag,
+        path: `${BASE}/orders`,
+      },
+      {
+        name: "Invoices",
+        icon: FaFileInvoice,
+        path: `${BASE}/invoices`,
+      },
+      {
+        name: "Availability Requests",
+        icon: FaQuestionCircle,
+        path: `${BASE}/availability-requests`,
+      },
+      {
+        name: "Inventory",
+        icon: FaWarehouse,
+        path: `${BASE}/inventory-dashboard`,
+      },
+      {
+        name: "Stock History",
+        icon: FaHistory,
+        path: `${BASE}/stock-history`,
+      },
+    ],
+  },
+  {
+    title: "STAFF & LEAVES",
+    links: [
+      {
+        name: "Apply Leave",
+        icon: FaCalendarPlus,
+        path: `${BASE}/leave/apply`,
+      },
+      {
+        name: "My Leaves",
+        icon: FaCalendarCheck,
+        path: `${BASE}/leaves`,
+      },
+    ],
+  },
+  {
+    title: "ACCOUNTANT",
+    links: [
+      {
+        name: "Sales & Payments",
+        icon: FaMoneyBillWave,
+        path: `${BASE}/accountant/sales-payments`,
+      },
+      {
+        name: "Invoices",
+        icon: FaFileInvoiceDollar,
+        path: `${BASE}/accountant/invoices`,
+      },
+      {
+        name: "Salary",
+        icon: FaUserTie,
+        path: `${BASE}/accountant/salary`,
+      },
+      {
+        name: "Expenses",
+        icon: FaWallet,
+        path: `${BASE}/accountant/expenses`,
+      },
+      {
+        name: "Purchase / Procurement",
+        icon: FaShoppingCart,
+        path: `${BASE}/accountant/purchases`,
+      },
+      {
+        name: "Financial Reports",
+        icon: FaChartLine,
+        path: `${BASE}/accountant/financial-reports`,
+      },
+    ],
+  },
+];
+
+const getIsMobile = () =>
+  typeof window !== "undefined" &&
+  window.innerWidth <= MOBILE_BREAKPOINT;
+
+export default function ReceptionistLayout() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const [isMobile, setIsMobile] = useState(getIsMobile);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(
+    () => !getIsMobile()
+  );
+  const [searchTerm, setSearchTerm] = useState("");
+
+  // Keep the sidebar state synchronized with the viewport.
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(
+      `(max-width: ${MOBILE_BREAKPOINT}px)`
+    );
+
+    const handleBreakpointChange = (event) => {
+      setIsMobile(event.matches);
+      setIsSidebarOpen(!event.matches);
+    };
+
+    setIsMobile(mediaQuery.matches);
+    setIsSidebarOpen(!mediaQuery.matches);
+
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener(
+        "change",
+        handleBreakpointChange
+      );
+    } else {
+      mediaQuery.addListener(handleBreakpointChange);
+    }
+
+    return () => {
+      if (mediaQuery.removeEventListener) {
+        mediaQuery.removeEventListener(
+          "change",
+          handleBreakpointChange
+        );
+      } else {
+        mediaQuery.removeListener(handleBreakpointChange);
+      }
+    };
+  }, []);
+
+  // Close the mobile drawer after navigation.
+  useEffect(() => {
+    if (isMobile) {
+      setIsSidebarOpen(false);
+    }
+  }, [location.pathname, isMobile]);
+
+  // Prevent background scrolling while the mobile drawer is open.
+  useEffect(() => {
+    if (!isMobile || !isSidebarOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isMobile, isSidebarOpen]);
+
+  // Close the mobile drawer with Escape.
+  useEffect(() => {
+    if (!isMobile || !isSidebarOpen) return;
+
+    const handleEscape = (event) => {
+      if (event.key === "Escape") {
+        setIsSidebarOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleEscape);
+
+    return () => {
+      window.removeEventListener("keydown", handleEscape);
+    };
+  }, [isMobile, isSidebarOpen]);
+
+  const toggleSidebar = useCallback(() => {
+    setIsSidebarOpen((previous) => !previous);
+  }, []);
+
+  const closeSidebar = useCallback(() => {
+    setIsSidebarOpen(false);
+  }, []);
+
+  const handleNavClick = useCallback(() => {
+    if (isMobile) {
+      setIsSidebarOpen(false);
+    }
+  }, [isMobile]);
+
+  const handleLogout = useCallback(() => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("user");
+    localStorage.removeItem("isLoggedIn");
+
+    navigate("/login", { replace: true });
+  }, [navigate]);
+
+  const sidebarClassName = [
+    "rep-sidebar",
+    isSidebarOpen
+      ? "rep-sidebar-open"
+      : "rep-sidebar-collapsed",
+  ].join(" ");
+
+  const layoutClassName = [
+    "rep-layout-root",
+    isSidebarOpen
+      ? "rep-layout-sidebar-open"
+      : "rep-layout-sidebar-closed",
+    isMobile ? "rep-layout-mobile" : "rep-layout-desktop",
+  ].join(" ");
+
+  return (
+    <div className={layoutClassName}>
+      {/* MOBILE TOPBAR */}
+      <header className="rep-mobile-topbar">
+        <button
+          type="button"
+          className="rep-mobile-brand"
+          onClick={() => navigate(BASE)}
+          aria-label="Go to sales dashboard"
+        >
+          <span className="rep-brand-mark">
+            <FaHeadset />
+          </span>
+
+          <span className="rep-mobile-brand-text">
+            <strong>ZAID INFOTECH</strong>
+            <small>Receptionist</small>
+          </span>
+        </button>
+
+        <button
+          type="button"
+          className="rep-menu-toggle-btn"
+          onClick={toggleSidebar}
+          aria-label={
+            isSidebarOpen
+              ? "Close receptionist menu"
+              : "Open receptionist menu"
+          }
+          aria-expanded={isSidebarOpen}
+          aria-controls="rep-sidebar-navigation"
+        >
+          {isSidebarOpen ? <FaTimes /> : <FaBars />}
+        </button>
+      </header>
+
+      {/* MOBILE DRAWER OVERLAY */}
+      {isMobile && isSidebarOpen && (
+        <button
+          type="button"
+          className="rep-sidebar-overlay"
+          onClick={closeSidebar}
+          aria-label="Close navigation menu"
+          tabIndex={-1}
+        />
+      )}
+
+      {/* SIDEBAR */}
+      <aside
+        id="rep-sidebar-navigation"
+        className={sidebarClassName}
+        aria-label="Receptionist sidebar"
+        aria-hidden={!isSidebarOpen}
+        inert={!isSidebarOpen}
+      >
+        <button
+          type="button"
+          className="rep-sidebar-brand"
+          onClick={() => {
+            navigate(BASE);
+            handleNavClick();
+          }}
+          aria-label="ZAID INFOTECH home"
+        >
+          <span className="rep-brand-avatar">
+            <FaHeadset />
+          </span>
+
+          <span className="rep-brand-text">
+            <strong>
+              ZAID <span>INFOTECH</span>
+            </strong>
+            <small>Front Desk &amp; POS</small>
+          </span>
+        </button>
+
+        <div className="rep-nav-caption">
+          WORKSPACE
+        </div>
+
+        <nav
+          className="rep-nav-section"
+          aria-label="Receptionist navigation"
+        >
+          {NAV_SECTIONS.map((section) => (
+            <div
+              className="rep-nav-group"
+              key={section.title}
+            >
+              <span className="rep-nav-heading">
+                {section.title}
+              </span>
+
+              {section.links.map((item) => {
+                const Icon = item.icon;
+
+                return (
+                  <NavLink
+                    key={item.path}
+                    to={item.path}
+                    end={item.end || false}
+                    onClick={handleNavClick}
+                    title={item.name}
+                    className={({ isActive }) =>
+                      `rep-nav-item ${
+                        isActive
+                          ? "rep-nav-item-active"
+                          : ""
+                      }`
+                    }
+                  >
+                    <Icon
+                      className="rep-nav-icon"
+                      aria-hidden="true"
+                    />
+
+                    <span className="rep-nav-label">
+                      {item.name}
+                    </span>
+                  </NavLink>
+                );
+              })}
+            </div>
+          ))}
+        </nav>
+
+        {/* FIXED SIDEBAR FOOTER */}
+        <div className="rep-sidebar-footer">
+          <div className="rep-user-profile">
+            <div className="rep-user-badge">R</div>
+
+            <div className="rep-user-meta">
+              <strong>Reception Desk</strong>
+              <small>
+                <span className="rep-online-dot" />
+                Online Session
+              </small>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            className="rep-logout-btn"
+            onClick={handleLogout}
+            title="Logout"
+            aria-label="Logout"
+          >
+            <FaSignOutAlt />
+          </button>
+        </div>
+      </aside>
+
+      {/* MAIN AREA */}
+      <div className="rep-main-shell">
+        {/* DESKTOP TOPBAR */}
+        <header className="rep-desktop-topbar">
+          <div className="rep-topbar-left">
+            <button
+              type="button"
+              className="rep-topbar-menu-btn"
+              onClick={toggleSidebar}
+              aria-label={
+                isSidebarOpen
+                  ? "Collapse sidebar"
+                  : "Expand sidebar"
+              }
+              aria-expanded={isSidebarOpen}
+              aria-controls="rep-sidebar-navigation"
+              title={
+                isSidebarOpen
+                  ? "Collapse sidebar"
+                  : "Expand sidebar"
+              }
+            >
+              {isSidebarOpen ? <FaTimes /> : <FaBars />}
+            </button>
+
+            <label className="rep-search-box">
+              <FaSearch aria-hidden="true" />
+
+              <input
+                type="search"
+                value={searchTerm}
+                onChange={(event) =>
+                  setSearchTerm(event.target.value)
+                }
+                placeholder="Search receptionist tools..."
+                aria-label="Search receptionist tools"
+              />
+
+              {searchTerm && (
+                <button
+                  type="button"
+                  className="rep-search-clear"
+                  onClick={() => setSearchTerm("")}
+                  aria-label="Clear search"
+                >
+                  <FaTimes />
+                </button>
+              )}
+            </label>
+          </div>
+
+          <div className="rep-topbar-right">
+            <button
+              type="button"
+              className="rep-notification-btn"
+              aria-label="Notifications"
+              title="Notifications"
+            >
+              <FaBell />
+              <span className="rep-notification-dot" />
+            </button>
+
+            <div className="rep-topbar-divider" />
+
+            <button
+              type="button"
+              className="rep-topbar-profile"
+              onClick={() => {
+                // Profile menu can be connected here later.
+              }}
+              aria-label="Reception Desk profile"
+            >
+              <span className="rep-topbar-avatar">R</span>
+
+              <span className="rep-topbar-user-info">
+                <strong>Reception Desk</strong>
+                <small>Front Desk</small>
+              </span>
+
+              <FaChevronDown className="rep-profile-chevron" />
+            </button>
+          </div>
+        </header>
+
+        {/* MOBILE SEARCH */}
+        <div className="rep-mobile-search-wrap">
+          <label className="rep-search-box rep-mobile-search">
+            <FaSearch aria-hidden="true" />
+
+            <input
+              type="search"
+              value={searchTerm}
+              onChange={(event) =>
+                setSearchTerm(event.target.value)
+              }
+              placeholder="Search receptionist tools..."
+              aria-label="Search receptionist tools"
+            />
+
+            {searchTerm && (
+              <button
+                type="button"
+                className="rep-search-clear"
+                onClick={() => setSearchTerm("")}
+                aria-label="Clear search"
+              >
+                <FaTimes />
+              </button>
+            )}
+          </label>
+        </div>
+
+        {/* KEEP ALL EXISTING PAGE CONTENT */}
+        <main className="rep-main-canvas">
+          <Outlet />
+        </main>
+      </div>
+    </div>
+  );
+}

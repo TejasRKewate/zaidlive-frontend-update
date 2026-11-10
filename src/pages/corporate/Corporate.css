@@ -1,0 +1,296 @@
+/* =====================================================
+   CORPORATE PROFILE — responsive (desktop / tablet / mobile)
+   Desktop  (>= 1025px): 3-column form
+   Tablet   (641px – 1024px): 2-column form
+   Mobile   (<= 640px): 1-column form, full-width button
+===================================================== */
+
+.profile-page {
+  --pf-accent: #16a34a;
+  --pf-accent-hover: #15803d;
+  --pf-ring: rgba(22, 163, 74, 0.18);
+  --pf-text: #111827;
+  --pf-text-muted: #6b7280;
+  --pf-label: #374151;
+  --pf-border: #d1d5db;
+  --pf-border-soft: #e5e7eb;
+  --pf-surface: #ffffff;
+  --pf-radius: 12px;
+
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 0 40px;
+  color: var(--pf-text);
+}
+
+.profile-page *,
+.profile-page *::before,
+.profile-page *::after {
+  box-sizing: border-box;
+}
+
+/* =====================================================
+   TITLES
+===================================================== */
+
+.profile-title {
+  margin: 0 0 20px;
+  font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.profile-section-title {
+  margin: 28px 0 16px;
+  padding-bottom: 10px;
+
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--pf-label);
+
+  border-bottom: 1px solid var(--pf-border-soft);
+}
+
+.profile-section-title:first-child {
+  margin-top: 0;
+}
+
+/* =====================================================
+   ALERTS
+===================================================== */
+
+.profile-alert {
+  margin-bottom: 16px;
+  padding: 12px 14px;
+
+  border-radius: 8px;
+  font-size: 0.875rem;
+  line-height: 1.45;
+
+  overflow-wrap: anywhere;
+  animation: profile-fade-in 0.2s ease-out;
+}
+
+.profile-alert-error {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+.profile-alert-success {
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+@keyframes profile-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =====================================================
+   FORM CARD
+===================================================== */
+
+.profile-form {
+  width: 100%;
+  padding: 28px;
+
+  background: var(--pf-surface);
+  border: 1px solid var(--pf-border-soft);
+  border-radius: var(--pf-radius);
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04),
+    0 4px 12px rgba(16, 24, 40, 0.04);
+}
+
+/* =====================================================
+   GRID
+===================================================== */
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* minmax(0,…) stops inputs forcing overflow */
+  gap: 18px 20px;
+}
+
+.profile-form-row {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.profile-form-row-full {
+  grid-column: 1 / -1;
+}
+
+.profile-form-row label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--pf-label);
+}
+
+/* =====================================================
+   INPUTS
+===================================================== */
+
+.profile-form-row input,
+.profile-form-row select {
+  width: 100%;
+  min-width: 0;
+  min-height: 42px;
+
+  padding: 9px 12px;
+
+  font-family: inherit;
+  font-size: 0.875rem;
+  color: var(--pf-text);
+
+  background: #fff;
+  border: 1px solid var(--pf-border);
+  border-radius: 8px;
+
+  transition: border-color 0.15s ease, box-shadow 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.profile-form-row select {
+  cursor: pointer;
+}
+
+.profile-form-row input::placeholder {
+  color: #9ca3af;
+}
+
+@media (hover: hover) {
+  .profile-form-row input:hover:not(:disabled),
+  .profile-form-row select:hover:not(:disabled) {
+    border-color: #9ca3af;
+  }
+}
+
+.profile-form-row input:focus,
+.profile-form-row select:focus {
+  outline: none;
+  border-color: var(--pf-accent);
+  box-shadow: 0 0 0 3px var(--pf-ring);
+}
+
+.profile-form-row input:disabled {
+  background: #f3f4f6;
+  color: var(--pf-text-muted);
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   SAVE BUTTON
+===================================================== */
+
+.profile-save-btn {
+  min-height: 44px;
+  margin-top: 28px;
+  padding: 10px 24px;
+
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+
+  background: var(--pf-accent);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+@media (hover: hover) {
+  .profile-save-btn:hover:not(:disabled) {
+    background: var(--pf-accent-hover);
+  }
+}
+
+.profile-save-btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.profile-save-btn:focus-visible {
+  outline: 2px solid var(--pf-accent);
+  outline-offset: 2px;
+}
+
+.profile-save-btn:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   TABLET (641px – 1024px) — 2 columns
+===================================================== */
+
+@media (max-width: 1024px) {
+  .profile-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* =====================================================
+   MOBILE (<= 640px) — 1 column
+===================================================== */
+
+@media (max-width: 640px) {
+  .profile-page {
+    padding: 8px 0 28px;
+  }
+
+  .profile-form {
+    padding: 18px 16px;
+    border-radius: 10px;
+  }
+
+  .profile-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .profile-section-title {
+    margin: 24px 0 14px;
+  }
+
+  /* 16px prevents iOS Safari from zooming into the field on focus */
+  .profile-form-row input,
+  .profile-form-row select {
+    min-height: 46px;
+    font-size: 1rem;
+  }
+
+  .profile-save-btn {
+    width: 100%;
+    min-height: 48px;
+  }
+}
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-alert {
+    animation: none;
+  }
+
+  .profile-form-row input,
+  .profile-form-row select,
+  .profile-save-btn {
+    transition: none;
+  }
+}

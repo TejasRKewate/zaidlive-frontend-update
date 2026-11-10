@@ -1,0 +1,665 @@
+
+/* =========================================================
+   ADD CATEGORY — MODERN SAAS ADMIN DESIGN
+   Fully responsive | Scoped styles
+========================================================= */
+
+.add-category-page {
+  --ac-primary: #16a34a;
+  --ac-primary-dark: #15803d;
+  --ac-primary-light: #f0fdf4;
+  --ac-text: #17211b;
+  --ac-secondary: #64748b;
+  --ac-border: #e2e8f0;
+  --ac-bg: #f8fafc;
+  --ac-white: #ffffff;
+  --ac-danger: #dc2626;
+
+  width: 100%;
+  min-height: 100vh;
+  padding: clamp(20px, 4vw, 48px);
+  box-sizing: border-box;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  background: #f8fafc;
+
+  font-family: Inter, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+
+  color: var(--ac-text);
+}
+
+.add-category-page *,
+.add-category-page *::before,
+.add-category-page *::after {
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   MAIN CARD
+========================================================= */
+
+.add-category-page .category-card {
+  width: 100%;
+  max-width: 760px;
+  padding: clamp(22px, 4vw, 38px);
+
+  background: var(--ac-white);
+  border: 1px solid #e8edf0;
+  border-radius: 18px;
+
+  box-shadow:
+    0 2px 5px rgba(15, 23, 42, 0.02),
+    0 10px 35px rgba(15, 23, 42, 0.045);
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.add-category-page .card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  padding-bottom: 25px;
+  margin-bottom: 27px;
+
+  border-bottom: 1px solid #edf0f2;
+}
+
+.add-category-page .card-header h2 {
+  margin: 0;
+
+  font-size: clamp(21px, 2.5vw, 26px);
+  font-weight: 750;
+  letter-spacing: -0.8px;
+  line-height: 1.3;
+
+  color: #17211b;
+}
+
+.add-category-page .card-header p {
+  margin: 0;
+
+  color: #84908a;
+
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   ALERT MESSAGES
+========================================================= */
+
+.add-category-page .alert-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+
+  width: 100%;
+  padding: 13px 16px;
+  margin-bottom: 23px;
+
+  border-radius: 10px;
+
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.add-category-page .alert-box.success {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #15803d;
+}
+
+.add-category-page .alert-box.error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+}
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.add-category-page .category-form {
+  display: flex;
+  flex-direction: column;
+  gap: 23px;
+
+  width: 100%;
+}
+
+.add-category-page .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+
+  width: 100%;
+  min-width: 0;
+}
+
+/* =========================================================
+   LABELS
+========================================================= */
+
+.add-category-page .form-group label {
+  color: #334155;
+
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   INPUTS / SELECT / TEXTAREA
+========================================================= */
+
+.add-category-page .form-group input[type="text"],
+.add-category-page .form-group textarea,
+.add-category-page .category-form select {
+  display: block;
+
+  width: 100%;
+  min-width: 0;
+
+  padding: 0 14px;
+
+  background-color: #ffffff;
+  border: 1px solid #dce3e9;
+  border-radius: 9px;
+
+  color: #17211b;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 450;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.add-category-page .form-group input[type="text"],
+.add-category-page .category-form select {
+  height: 47px;
+}
+
+.add-category-page .form-group textarea {
+  min-height: 115px;
+  padding: 13px 14px;
+
+  line-height: 1.65;
+  resize: vertical;
+}
+
+.add-category-page .form-group input::placeholder,
+.add-category-page .form-group textarea::placeholder {
+  color: #a0aab5;
+  font-weight: 400;
+}
+
+/* HOVER */
+
+.add-category-page .form-group input:hover,
+.add-category-page .form-group textarea:hover,
+.add-category-page .category-form select:hover {
+  border-color: #b8c8bd;
+}
+
+/* FOCUS */
+
+.add-category-page .form-group input:focus,
+.add-category-page .form-group textarea:focus,
+.add-category-page .category-form select:focus {
+  outline: none;
+
+  border-color: var(--ac-primary);
+
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.10);
+}
+
+/* SELECT */
+
+.add-category-page .category-form select {
+  cursor: pointer;
+  appearance: auto;
+}
+
+/* =========================================================
+   CATEGORY TYPE SELECTOR
+========================================================= */
+
+.add-category-page .category-form select {
+  background-color: #ffffff;
+}
+
+/* =========================================================
+   FILE UPLOAD
+========================================================= */
+
+.add-category-page .file-upload-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  width: 100%;
+  min-width: 0;
+  padding: 12px;
+
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 11px;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.add-category-page .file-upload-wrapper:hover {
+  background: #f0fdf4;
+  border-color: #86efac;
+}
+
+.add-category-page .file-input {
+  display: none;
+}
+
+.add-category-page .file-upload-btn {
+  flex-shrink: 0;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 40px;
+  padding: 0 16px;
+
+  background: #ffffff;
+  border: 1px solid #dce3e9;
+  border-radius: 8px;
+
+  color: #334155;
+
+  font-size: 12px;
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.add-category-page .file-upload-btn:hover {
+  background: #f0fdf4;
+  border-color: #86efac;
+  color: #15803d;
+}
+
+.add-category-page .file-name-display {
+  min-width: 0;
+  flex: 1;
+
+  color: #84908a;
+
+  font-size: 12px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* =========================================================
+   IMAGE PREVIEW
+========================================================= */
+
+.add-category-page .preview-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  width: fit-content;
+  max-width: 100%;
+
+  margin-top: 14px;
+  padding: 12px;
+
+  background: #f8fafc;
+  border: 1px solid #e8edf0;
+  border-radius: 12px;
+}
+
+.add-category-page .category-preview {
+  display: block;
+
+  width: 90px;
+  height: 90px;
+
+  object-fit: cover;
+
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 9px;
+}
+
+.add-category-page .remove-image-btn {
+  min-height: 35px;
+  padding: 0 12px;
+
+  background: #fff1f2;
+  border: 1px solid #fecdd3;
+  border-radius: 7px;
+
+  color: #e11d48;
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.add-category-page .remove-image-btn:hover {
+  background: #ffe4e6;
+  border-color: #fda4af;
+}
+
+/* =========================================================
+   HELP TEXT
+========================================================= */
+
+.add-category-page .form-help {
+  color: #94a3b8;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   FORM ACTIONS
+========================================================= */
+
+.add-category-page .form-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 11px;
+
+  padding-top: 22px;
+  margin-top: 5px;
+
+  border-top: 1px solid #edf0f2;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.add-category-page .btn-cancel,
+.add-category-page .btn-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 45px;
+  min-width: 125px;
+
+  padding: 0 20px;
+
+  border-radius: 9px;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.15s ease;
+}
+
+.add-category-page .btn-cancel:active,
+.add-category-page .btn-submit:active {
+  transform: scale(0.98);
+}
+
+/* RESET */
+
+.add-category-page .btn-cancel {
+  background: #ffffff;
+  border: 1px solid #dce3e9;
+
+  color: #475569;
+}
+
+.add-category-page .btn-cancel:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+/* SUBMIT */
+
+.add-category-page .btn-submit {
+  background: #16a34a;
+  border: 1px solid #16a34a;
+
+  color: #ffffff;
+
+  box-shadow: 0 3px 8px rgba(22, 163, 74, 0.15);
+}
+
+.add-category-page .btn-submit:hover {
+  background: #15803d;
+  border-color: #15803d;
+
+  box-shadow: 0 5px 12px rgba(22, 163, 74, 0.20);
+}
+
+/* DISABLED */
+
+.add-category-page .category-form button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.add-category-page .btn-submit:disabled {
+  background: #86efac;
+  border-color: #86efac;
+}
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+.add-category-page button:focus-visible,
+.add-category-page input:focus-visible,
+.add-category-page textarea:focus-visible,
+.add-category-page select:focus-visible,
+.add-category-page label:focus-visible {
+  outline: 3px solid rgba(22, 163, 74, 0.20);
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 768px) {
+  .add-category-page {
+    padding: 28px 18px;
+  }
+
+  .add-category-page .category-card {
+    max-width: 100%;
+    padding: 28px;
+  }
+
+  .add-category-page .category-form {
+    gap: 21px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+  .add-category-page {
+    min-height: 100vh;
+    padding: 16px 11px;
+  }
+
+  .add-category-page .category-card {
+    padding: 21px 17px;
+    border-radius: 13px;
+  }
+
+  .add-category-page .card-header {
+    padding-bottom: 19px;
+    margin-bottom: 21px;
+  }
+
+  .add-category-page .card-header h2 {
+    font-size: 21px;
+  }
+
+  .add-category-page .card-header p {
+    font-size: 13px;
+  }
+
+  .add-category-page .category-form {
+    gap: 19px;
+  }
+
+  .add-category-page .form-group {
+    gap: 8px;
+  }
+
+  .add-category-page .form-group label {
+    font-size: 12.5px;
+  }
+
+  .add-category-page .form-group input[type="text"],
+  .add-category-page .category-form select {
+    height: 45px;
+    font-size: 13px;
+  }
+
+  .add-category-page .form-group textarea {
+    min-height: 105px;
+    font-size: 13px;
+  }
+
+  /* FILE UPLOAD */
+
+  .add-category-page .file-upload-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .add-category-page .file-upload-btn {
+    width: 100%;
+    min-height: 43px;
+  }
+
+  .add-category-page .file-name-display {
+    width: 100%;
+    text-align: center;
+    padding: 3px 5px;
+  }
+
+  /* PREVIEW */
+
+  .add-category-page .preview-wrapper {
+    width: 100%;
+    gap: 12px;
+  }
+
+  .add-category-page .category-preview {
+    width: 75px;
+    height: 75px;
+  }
+
+  /* ACTIONS */
+
+  .add-category-page .form-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 10px;
+
+    padding-top: 19px;
+  }
+
+  .add-category-page .btn-cancel,
+  .add-category-page .btn-submit {
+    width: 100%;
+    min-height: 46px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+  .add-category-page {
+    padding: 12px 8px;
+  }
+
+  .add-category-page .category-card {
+    padding: 19px 14px;
+  }
+
+  .add-category-page .card-header h2 {
+    font-size: 19px;
+  }
+
+  .add-category-page .card-header p {
+    font-size: 12px;
+  }
+
+  .add-category-page .category-preview {
+    width: 65px;
+    height: 65px;
+  }
+
+  .add-category-page .remove-image-btn {
+    padding: 0 9px;
+    font-size: 11px;
+  }
+}
+
+/* =========================================================
+   LARGE SCREENS
+========================================================= */
+
+@media (min-width: 1440px) {
+  .add-category-page .category-card {
+    max-width: 780px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .add-category-page *,
+  .add-category-page *::before,
+  .add-category-page *::after {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}
