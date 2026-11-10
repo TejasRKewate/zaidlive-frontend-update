@@ -187,6 +187,7 @@ import AddOffer from "./pages/Admin/Offers/AddOffer";
 
 import AddCoupon from "./components/Admin/Coupon/AddCoupon";
 import CouponList from "./components/Admin/Coupon/CouponList";
+ 
 
 // ===============================
 // NOTIFICATIONS
@@ -361,7 +362,7 @@ import RepairTerms from "./pages/Legal/RepairTerms/RepairTerms";
 import TermsConditions from "./pages/TermsConditions/TermsConditions";
 
 import CorporateNotifications from "./pages/corporate/CorporateNotifications";
-
+//import  AddSubCategory  from './pages/Admin/Category/SubCategory/AddSubCategory.jsx'
 // =====================================================
 // APP
 // =====================================================
@@ -796,7 +797,7 @@ const hideGlobalHeader =
 
             <Route path="/add-category" element={<AddCategory />} />
             <Route path="/categories" element={<CategoryList />} />
-            <Route path="/add-subcategory" element={<AddSubCategory />} />
+            <Route path="/add-subcategory" element={<AddSubCategory/>} />
             <Route path="/subcategories" element={<SubCategoryList />} />
             <Route
               path="/edit-subcategory/:id"
