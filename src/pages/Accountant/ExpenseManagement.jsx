@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { FaEdit, FaPlus, FaReceipt, FaSearch, FaTrash, FaTimes } from "react-icons/fa";
 import { expenseApi, getApiError } from "../../services/accountingService";
+import './ExpenseManagement.css'
 
 const CATEGORIES = [
   ["OFFICE_RENT", "Office Rent"],
@@ -111,7 +112,7 @@ export default function ExpenseManagement() {
 
   return (
     <div className="accounting-page">
-      <style>{css}</style>
+      {/* <style>{css}</style> */}
       <div className="page-head">
         <div>
           <h1>Expense Management</h1>
@@ -151,13 +152,3 @@ export default function ExpenseManagement() {
   );
 }
 
-const css = `
-.accounting-page{padding:24px;font-family:Poppins,Arial,sans-serif;color:#172033;background:#f7f9fc;min-height:100vh}
-.page-head{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:20px}.page-head h1{margin:0;font-size:28px}.page-head p{margin:6px 0;color:#718096}
-.summary-card{background:#fff;border:1px solid #e6eaf0;border-radius:14px;padding:14px 20px;min-width:150px}.summary-card span{display:block;color:#718096;font-size:12px}.summary-card strong{font-size:22px}
-.panel{background:#fff;border:1px solid #e6eaf0;border-radius:14px;padding:20px;margin-bottom:20px;box-shadow:0 3px 15px rgba(0,0,0,.03)}.panel-title{grid-column:1/-1;font-weight:700;font-size:18px}
-.form-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}label{font-size:13px;font-weight:600;color:#445;display:flex;flex-direction:column;gap:7px}input,select,textarea{border:1px solid #d9dee7;border-radius:9px;padding:10px 11px;font:inherit;background:#fff}textarea{min-height:70px;resize:vertical}.wide{grid-column:1/-1}.actions{display:flex;gap:10px}
-.btn{border:0;border-radius:9px;padding:10px 16px;display:inline-flex;gap:8px;align-items:center;cursor:pointer;font-weight:600}.primary{background:#167c5a;color:#fff}.ghost{background:#edf1f5;color:#273444}.btn:disabled{opacity:.6}
-.alert{background:#fff0f0;color:#b42318;border:1px solid #ffd2d2;padding:11px 14px;border-radius:9px;margin-bottom:15px}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:14px}.toolbar h2{margin:0;font-size:19px}.search{display:flex;align-items:center;gap:8px;border:1px solid #d9dee7;border-radius:9px;padding:0 10px}.search input{border:0;outline:0}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:950px}th,td{padding:12px;border-bottom:1px solid #edf0f4;text-align:left;font-size:13px}th{background:#fafbfc;color:#5b6575}.badge{padding:5px 8px;border-radius:999px;font-size:11px;font-weight:700}.paid{background:#e7f7ee;color:#157347}.pending{background:#fff4db;color:#946200}.cancelled{background:#ffe8e8;color:#b42318}.icon-btn{border:0;background:#eef3f7;padding:8px;border-radius:7px;margin-right:5px;cursor:pointer}.icon-btn.danger{color:#b42318}.empty{text-align:center;padding:35px;color:#778294}
-@media(max-width:900px){.form-grid{grid-template-columns:1fr 1fr}}@media(max-width:600px){.page-head{flex-direction:column;align-items:stretch}.form-grid{grid-template-columns:1fr}.wide{grid-column:auto}}
-`;
