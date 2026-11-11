@@ -1,4 +1,4 @@
-.add-offer-page {
+/* .add-offer-page {
   min-height: 100vh;
   padding: 30px;
   background: #f8fafc;
@@ -58,4 +58,101 @@
 
 .add-offer-box button:hover {
   background: #4338ca;
+} */
+
+
+.add-offer-page {
+  --accent: #6956d9;
+  --accent-dark: #5743c5;
+  --ink: #24233a;
+  --muted: #77768a;
+  --line: #e9e7f2;
+
+  display: grid;
+  min-height: 60vh;
+  padding: 32px 20px;
+  place-items: center;
+  color: var(--ink);
+}
+
+.add-offer-box {
+  width: min(100%, 480px);
+  box-sizing: border-box;
+  padding: clamp(28px, 6vw, 48px);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: 0 16px 48px rgba(47, 38, 91, 0.08);
+  text-align: center;
+}
+
+.add-offer-icon {
+  display: grid;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 22px;
+  background: #f1efff;
+  border: 1px solid #e7e2ff;
+  border-radius: 18px;
+  font-size: 30px;
+  place-items: center;
+}
+
+.add-offer-box h1 {
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(24px, 4vw, 30px);
+  font-weight: 750;
+  letter-spacing: -0.04em;
+}
+
+.add-offer-box p {
+  max-width: 340px;
+  margin: 12px auto 26px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.add-offer-box button {
+  min-height: 46px;
+  padding: 0 22px;
+  color: #fff;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  box-shadow: 0 5px 12px rgba(105, 86, 217, 0.2);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 650;
+  cursor: pointer;
+  transition: 160ms ease;
+}
+
+.add-offer-box button:hover {
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+  box-shadow: 0 7px 16px rgba(105, 86, 217, 0.25);
+  transform: translateY(-1px);
+}
+
+.add-offer-box button:focus-visible {
+  outline: 3px solid rgba(105, 86, 217, 0.28);
+  outline-offset: 3px;
+}
+
+@media (max-width: 480px) {
+  .add-offer-page {
+    min-height: 55vh;
+    padding: 24px 12px;
+  }
+
+  .add-offer-box {
+    padding: 30px 22px;
+    border-radius: 16px;
+  }
+
+  .add-offer-box button {
+    width: 100%;
+  }
 }
